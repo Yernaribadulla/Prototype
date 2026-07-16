@@ -1,0 +1,519 @@
+/* ============================================
+   ШТИЛЬ — автономная кофейня на воде, Актау
+   ============================================ */
+
+:root {
+  /* colour */
+  --color-abyss: #081820;
+  --color-deep: #0d2734;
+  --color-deep-2: #123544;
+  --color-foam: #F3EFE4;
+  --color-foam-70: rgba(243, 239, 228, 0.7);
+  --color-foam-45: rgba(243, 239, 228, 0.45);
+  --color-brass: #C9A24B;
+  --color-brass-bright: #E4C273;
+  --color-tide: #5FA3AC;
+  --color-line: rgba(243, 239, 228, 0.14);
+  --color-line-strong: rgba(243, 239, 228, 0.24);
+
+  /* type */
+  --font-display: 'Bricolage Grotesque', 'Helvetica Neue', sans-serif;
+  --font-body: 'Public Sans', 'Helvetica Neue', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* radius */
+  --radius-s: 4px;
+  --radius-m: 14px;
+  --radius-l: 26px;
+
+  /* layout */
+  --container: 1200px;
+  --edge: clamp(20px, 5vw, 64px);
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--color-abyss);
+  color: var(--color-foam);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+img { max-width: 100%; display: block; }
+
+a { color: inherit; text-decoration: none; }
+
+.section-inner {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 var(--edge);
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-brass);
+  margin: 0 0 18px;
+}
+
+/* ---------- fade-in ---------- */
+.fade-in {
+  opacity: 0;
+  transform: translateY(18px);
+  animation: fadeInUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation-delay: calc(var(--delay, 0) * 0.14s);
+}
+@keyframes fadeInUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fade-in { animation: none; opacity: 1; transform: none; }
+  html { scroll-behavior: auto; }
+}
+
+/* ---------- nav ---------- */
+.nav {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  z-index: 20;
+  padding: 28px var(--edge) 0;
+}
+.nav__inner {
+  max-width: var(--container);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.nav__mark {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 20px;
+  letter-spacing: 0.02em;
+}
+.nav__coords {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  color: var(--color-foam-70);
+  border: 1px solid var(--color-line-strong);
+  padding: 6px 12px;
+  border-radius: 100px;
+}
+@media (max-width: 640px) {
+  .nav__coords { display: none; }
+}
+
+/* ---------- buttons ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 15px;
+  padding: 16px 30px;
+  border-radius: var(--radius-s);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+  white-space: nowrap;
+}
+.btn--solid {
+  background: var(--color-brass);
+  color: var(--color-abyss);
+}
+.btn--solid:hover {
+  background: var(--color-brass-bright);
+  transform: translateY(-2px);
+}
+.btn--ghost {
+  background: transparent;
+  color: var(--color-foam);
+  border-color: var(--color-line-strong);
+}
+.btn--ghost:hover {
+  border-color: var(--color-brass);
+  color: var(--color-brass-bright);
+  transform: translateY(-2px);
+}
+
+/* ---------- hero ---------- */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 120px var(--edge) 60px;
+  overflow: hidden;
+}
+.hero__media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.hero__image {
+  position: absolute;
+  inset: 0;
+  background-image: url('./Отдаленная\ фотка\ кафешки.png');
+  background-size: cover;
+  background-position: center;
+  filter: saturate(0.9) brightness(0.75);
+  transform: scale(1.04);
+}
+.hero__gradient {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(8,24,32,0.55) 0%, rgba(8,24,32,0.35) 32%, rgba(8,24,32,0.75) 78%, var(--color-abyss) 100%);
+}
+.hero__horizon {
+  position: absolute;
+  left: 0; right: 0;
+  top: 44%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-brass-bright) 45%, var(--color-brass-bright) 55%, transparent);
+  opacity: 0.55;
+}
+.hero__glint {
+  position: absolute;
+  top: -7px;
+  left: 20%;
+  width: 15px; height: 15px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--color-brass-bright) 0%, rgba(228,194,115,0) 70%);
+  filter: blur(1px);
+  animation: drift 14s ease-in-out infinite;
+}
+@keyframes drift {
+  0%, 100% { left: 14%; opacity: 0.5; }
+  50% { left: 62%; opacity: 1; }
+}
+
+.hero__content { position: relative; z-index: 2; max-width: 760px; }
+.hero__title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(34px, 6vw, 64px);
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+  margin: 0 0 22px;
+}
+.hero__subtitle {
+  font-size: clamp(15px, 2vw, 18px);
+  color: var(--color-foam-70);
+  max-width: 520px;
+  margin: 0 auto 40px;
+}
+.hero__actions {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.hero__scroll {
+  position: absolute;
+  bottom: 34px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+.hero__scroll span {
+  width: 1px; height: 40px;
+  background: linear-gradient(180deg, var(--color-brass), transparent);
+}
+.hero__scroll p {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-foam-45);
+  margin: 0;
+}
+@media (max-width: 640px) {
+  .hero__actions { flex-direction: column; width: 100%; }
+  .hero__actions .btn { width: 100%; }
+  .hero__scroll { display: none; }
+}
+
+/* ---------- features ---------- */
+.features { padding: 130px 0 110px; }
+.features__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--color-line);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-m);
+  overflow: hidden;
+}
+.feature-card {
+  background: var(--color-deep);
+  padding: 44px 34px;
+}
+.feature-card__icon {
+  width: 34px; height: 34px;
+  color: var(--color-brass);
+  margin-bottom: 26px;
+}
+.feature-card__label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-tide);
+  margin: 0 0 14px;
+}
+.feature-card__title {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 700;
+  margin: 0 0 12px;
+}
+.feature-card__text {
+  color: var(--color-foam-70);
+  font-size: 15px;
+  margin: 0;
+}
+@media (max-width: 860px) {
+  .features__grid { grid-template-columns: 1fr; }
+}
+
+/* ---------- boats ---------- */
+.boats { padding: 40px 0 120px; }
+.boats__head { max-width: 620px; margin-bottom: 56px; }
+.boats__title {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 4vw, 40px);
+  font-weight: 700;
+  margin: 0 0 18px;
+}
+.boats__text {
+  color: var(--color-foam-70);
+  font-size: 16px;
+  margin: 0;
+}
+.boats__grid {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: 24px;
+}
+.boat-card {
+  position: relative;
+  border-radius: var(--radius-l);
+  border: 1px solid var(--color-line);
+  padding: 40px 34px;
+  min-height: 260px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.boat-card--speed {
+  background: linear-gradient(155deg, var(--color-deep-2), var(--color-deep) 70%);
+}
+.boat-card--comfort {
+  background: linear-gradient(155deg, var(--color-deep), var(--color-abyss) 75%);
+}
+.boat-card__badge {
+  position: absolute;
+  top: 32px; left: 34px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--color-abyss);
+  background: var(--color-brass);
+  padding: 6px 12px;
+  border-radius: 100px;
+}
+.boat-card__title {
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0 0 10px;
+}
+.boat-card__text {
+  color: var(--color-foam-70);
+  font-size: 15px;
+  margin: 0;
+  max-width: 380px;
+}
+@media (max-width: 860px) {
+  .boats__grid { grid-template-columns: 1fr; }
+}
+
+/* ---------- menu preview ---------- */
+.menu-preview { padding: 20px 0 130px; text-align: center; }
+.menu-preview__title {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 4vw, 40px);
+  font-weight: 700;
+  margin: 0 auto 56px;
+}
+.menu-preview__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  text-align: left;
+}
+.menu-item {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: inherit;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.menu-item__frame {
+  display: block;
+  border-radius: var(--radius-m);
+  overflow: hidden;
+  aspect-ratio: 4/5;
+  border: 1px solid var(--color-line);
+}
+.menu-item__frame img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.menu-item:hover .menu-item__frame img { transform: scale(1.06); }
+.menu-item__name {
+  font-size: 16px;
+  font-weight: 600;
+}
+.menu-item__price {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--color-brass-bright);
+}
+.menu-preview__cta { margin-top: 56px; }
+@media (max-width: 860px) {
+  .menu-preview__grid { grid-template-columns: 1fr; }
+}
+
+/* ---------- modal ---------- */
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  align-items: center;
+  justify-content: center;
+  padding: 40px var(--edge);
+}
+.modal__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(4, 12, 16, 0.82);
+  backdrop-filter: blur(4px);
+}
+.modal__box {
+  position: relative;
+  z-index: 2;
+  max-width: 620px;
+  max-height: 88vh;
+  width: 100%;
+  background: var(--color-deep);
+  border: 1px solid var(--color-line-strong);
+  border-radius: var(--radius-m);
+  padding: 18px;
+  overflow: auto;
+}
+.modal__image {
+  width: 100%;
+  border-radius: var(--radius-s);
+  display: block;
+}
+.modal__close {
+  position: absolute;
+  top: -18px; right: -18px;
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background: var(--color-brass);
+  color: var(--color-abyss);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.modal__close svg { width: 18px; height: 18px; }
+@media (max-width: 640px) {
+  .modal__close { top: -14px; right: 6px; }
+}
+
+/* ---------- footer ---------- */
+.footer {
+  padding: 90px 0 0;
+  border-top: 1px solid var(--color-line);
+}
+.footer__inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 30px;
+  padding-bottom: 60px;
+  flex-wrap: wrap;
+}
+.footer__title {
+  font-family: var(--font-display);
+  font-size: clamp(26px, 4vw, 36px);
+  font-weight: 700;
+  margin: 0 0 14px;
+}
+.footer__address, .footer__hours {
+  color: var(--color-foam-70);
+  margin: 0 0 4px;
+  font-size: 15px;
+}
+.footer__links {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-start;
+}
+.footer__link {
+  font-size: 14px;
+  border-bottom: 1px solid var(--color-line-strong);
+  padding-bottom: 2px;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+.footer__link:hover {
+  color: var(--color-brass-bright);
+  border-color: var(--color-brass-bright);
+}
+.footer__bottom {
+  border-top: 1px solid var(--color-line);
+  padding: 22px var(--edge);
+  display: flex;
+  justify-content: space-between;
+  max-width: var(--container);
+  margin: 0 auto;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--color-foam-45);
+  flex-wrap: wrap;
+  gap: 8px;
+}
+@media (max-width: 640px) {
+  .footer__inner { flex-direction: column; align-items: flex-start; }
+}
